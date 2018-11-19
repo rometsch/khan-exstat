@@ -1,0 +1,78 @@
+#+title: Khanacademy excersise status
+#+author: Thomas Rometsch
+
+* Description
+
+This is a tool to automatically extract the status of exercises for a list of students from the online learning platform [[https://khanacademy.org]].
+You'll need to register an app on Khan Academy in order to be able to authenticate your request and to see your students data.
+To register an app simply follow [[https://www.khanacademy.org/api-apps/register]] and note your keys.
+Keep them safe and secret as they provide access to your account via the API.
+
+Provided with a suitable list of students and a list of exercise names, the program uses the kahnacademy API to retrieve the learning status.
+An exercise with the status =practiced= is awarded with 1 point and an exercise with status =mastered= is awarded with 2 points.
+This simply reflects the needs of my teaching and can easily be changed in the code.
+
+Finally, the code outputs a formatted table of the results with tab separated values including the name and an id of the student, the total number of points and the points for each exercise.
+The name of the exercises are printed in the header for reference.
+
+An output with a list of students including only myself might be:
+
+#+BEGIN_EXAMPLE
+# 1	Powers of the imaginary unit
+# 2	Plot numbers on the complex plane
+# 3	Add & subtract complex numbers
+# 4	Graphically add & subtract complex numbers
+# 5	Multiply complex numbers
+# Student Name	student id	tot	1	2	3	4	5
+Thomas Rometsch	012345678   4	1	1	1	0	1
+#+END_EXAMPLE
+
+Since the values simply a tab separated file, the result can easily be parsed or imported in a spreadsheet program.
+
+* Dependencies
+
+The tool is written for =python3= and depends on the package =rauth=.
+You can install it e.g. via =pip3 install --user rauth=.
+
+* Command line arguments
+
+A call of the program with all necessary arguments is:
+
+#+BEGIN_EXAMPLE
+python3 khan-exstat.py --keys keys.txt --students students.txt --exercises exercises.txt
+#+END_EXAMPLE
+
+** --print-students
+
+Print a list of all students that have you as their coach.
+The format is the same as needed later for the students file, i.e. the name in the first column and the Khan =user_id= provided by the API in the second column separated by a tab.
+
+An example with myself as the only student is
+
+#+BEGIN_EXAMPLE
+Thomas Rometsch	http://id.khanacademy.org/my-numeric-id
+#+END_EXAMPLE
+
+Use this to create a list of students for your class.
+Save the output to a file and delete the unneeded rows.
+
+** --students FILENAME
+
+Specify the file with the list of students.
+The file needs to have the following syntax:
+
+#+BEGIN_EXAMPLE
+name <tab> user_id <tab> student_id
+#+END_EXAMPLE
+
+The first two columns can be produced with the =--print-students= option.
+The third column is optional and is meant to be the unique student id used by your institution.
+
+** --exercises FILENAME
+
+Specify the file containing the names of exercises.
+Just list all exercise names as they appear in the title on kahnacademy.org, each in a new row.
+
+** --keys FILENAME
+
+A text file containing your =Consumer Key= in the first line and your =Consumer Secret= in the second line.

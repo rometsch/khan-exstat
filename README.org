@@ -1,12 +1,15 @@
 #+title: Khanacademy excersise status
 #+author: Thomas Rometsch
 
-* Description
-
 This is a tool to automatically extract the status of exercises for a list of students from the online learning platform [[https://khanacademy.org]].
+
+* Register a Khan App
+
 You'll need to register an app on Khan Academy in order to be able to authenticate your request and to see your students data.
 To register an app simply follow [[https://www.khanacademy.org/api-apps/register]] and note your keys.
 Keep them safe and secret as they provide access to your account via the API.
+
+* Description
 
 Provided with a suitable list of students and a list of exercise names, the program uses the kahnacademy API to retrieve the learning status.
 An exercise with the status =practiced= is awarded with 1 point and an exercise with status =mastered= is awarded with 2 points.

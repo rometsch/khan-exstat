@@ -1,0 +1,10 @@
+Powers of the imaginary unit
+Plot numbers on the complex plane
+Add & subtract complex numbers
+Graphically add & subtract complex numbers
+Multiply complex numbers
+Finite geometric series
+Finite geometric series word problems
+Finite geometric series in sigma notation
+Arithmetic series
+Arithmetic series in sigma notation

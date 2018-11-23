@@ -35,6 +35,12 @@ Since the values simply a tab separated file, the result can easily be parsed or
 
 * How To
 
+Short version:
+
+1) Have =python3=, install package =rauth=, e.g. via =pip3 install --user rauth=
+2) go to [[https://www.khanacademy.org/api-apps/register]] to get a key and save the keys to a text file containing the consumer key in the first line and the consumer secret in the second line.
+3) Run =python3 khan-exstat.py --help= to figure out how it works. (hint: =--save-students= or =--print-students= will be helpful)
+
 This section describes the full process of how to use the program =khan-exstat= from installation over preparing the input files to calling the program.
 It is intended to be a very detailed guide and I try to cover as much as possible.
 

@@ -2,6 +2,7 @@
 #+author: Thomas Rometsch
 
 This is a tool to automatically extract the status of exercises for a list of students from the online learning platform [[https://khanacademy.org]].
+The code is released under MIT license.
 
 * Register a Khan App
 
@@ -31,6 +32,57 @@ Thomas Rometsch	012345678   4	1	1	1	0	1
 #+END_EXAMPLE
 
 Since the values simply a tab separated file, the result can easily be parsed or imported in a spreadsheet program.
+
+* How To
+
+This section describes the full process of how to use the program =khan-exstat= from installation over preparing the input files to calling the program.
+It is intended to be a very detailed guide and I try to cover as much as possible.
+
+1) Start by installing =Python3= if you have not already done it. 
+   We need it to run the code.
+   Install it via the package manager of your choice or download it on the [[https://www.python.org/downloads/release/python-371/][official webpage]] or somewhere else.
+2) Once you have =Python3=, we need to install the package =rauth= to handle the authentication with Khanacademy.
+   Install it with the python package manager of your choice.
+   I use the package manager =pip=.
+   You can get it from their homepage [[https://pypi.org/project/pip/][pypi.org]] or probably via your systems package manager (on linux).
+3) Now download to the code from this repository. Either as a [[https://github.com/rometsch/khan-exstat/archive/master.zip][zip file]] or using git by running =git clone https://github.com/rometsch/khan-exstat.git= inside a terminal.
+4) Change to the directory where you downloaded the code to and unzip it if necessary.
+5) Run =python3 khan-exstat.py --help= to see whether all dependencies are met. You should see the help message detailing the command line arguments.
+6) Now we need to get API Keys for Khanacademy.
+   Unfortunately, I can't simply provide my own app keys, because you can only get information about students who have the account as coach, who applied for the app keys.
+   This is to protect students data (see the [[https://github.com/Khan/khan-api/wiki/Khan-Academy-API-Authentication][khan-api wiki]] for details).
+   Go to [[https://www.khanacademy.org/api-apps/register]] and fill out the required information.
+   Save the keys to a text file, e.g. =keys.txt= with the first line being the =consumer key= and the second line being the =consumer secret=.
+   This should then look like
+   #+BEGIN_EXAMPLE
+   BEt1i4gVCP3wen5
+   XA93oqeHruZY5R9
+   #+END_EXAMPLE
+7) Let's check whether all works and get a list of all our students at the same time.
+   We pass the =key.txt= file to the script in order for it to know which keys to use.
+   In your terminal, run
+   #+BEGIN_EXAMPLE
+   python3 khan-exstat.py --keys keys.txt --save-students all_students.txt
+   #+END_EXAMPLE
+   We called the program with the =--save-students= with the arguments =all_students.txt=.
+   This save a list of all your students into the file =all_students.txt= in your current working directory.
+   After running the command, the Khanacademy webpage should pop up, asking you first to log-in and then to verify the api usage we just requested by running the script.
+   Click =confirm=.
+8) There should now be a list of student names in the first column of =all_students.txt=, separated from a list of the respective Khanacademy ids in the second column, separated by a tab character.
+   To make a list of students for which you want to retrieve the progress, delete all other lines from this file and save it under a new name, e.g. =my_math_class.txt=.
+9) We want to get the status for specific exercises on Khanacademy, so we need to provide the names of them.
+   Make a text file, e.g. =assignment1.txt= which has the name of one exercise in each line.
+   Have a look at the =samples= folder for examples.
+   (If you're a college of mine, the =assignment{}.txt= file reflect our current assignment ;))
+   For the time being, just copy =assigment1.txt= from the =samples= folder.
+10) Now we have everything in place to retrieve the information we want.
+    In your terminal, run
+    #+BEGIN_EXAMPLE
+    python3 khan-exstat.py --keys keys.txt --students my_math_class.txt --exercises assigment1.txt
+    #+END_EXAMPLE
+    You have to, once again, confirm the request in your browser.
+    The result should be a table, with the exercises printed in the header, the names of the students, (if you specified it, see below) an id, the total number of points and the points earned for each of the exercises.
+    Note that =1= point indicate an exercise with the status =practiced= while =2= points indicate the status =mastered=.
 
 * Dependencies
 
@@ -79,3 +131,7 @@ Just list all exercise names as they appear in the title on kahnacademy.org, eac
 ** --keys FILENAME
 
 A text file containing your =Consumer Key= in the first line and your =Consumer Secret= in the second line.
+
+* Credits
+
+This script is based on the example code =test_client2= from the [[https://github.com/Khan/khan-api][Kahn Api Repository]] which was released under MIT license.

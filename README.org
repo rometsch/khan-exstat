@@ -77,8 +77,8 @@ python3 khan-exstat.py --keys keys.txt --save-students all_students.txt
    For the time being, just copy =assigment1.txt= from the =samples= folder.
 10) Now we have everything in place to retrieve the information we want.
     In your terminal, run
-#+BEGIN_EXAMPLE
-python3 khan-exstat.py --keys keys.txt --students my_math_class.txt --exercises assigment1.txt
+    #+BEGIN_EXAMPLE
+    python3 khan-exstat.py --keys keys.txt --students my_math_class.txt --exercises assigment1.txt
 #+END_EXAMPLE
     You have to, once again, confirm the request in your browser.
     The result should be a table, with the exercises printed in the header, the names of the students, (if you specified it, see below) an id, the total number of points and the points earned for each of the exercises.

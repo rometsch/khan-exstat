@@ -148,6 +148,7 @@ def get_students_from_server(session):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--print-students", default=False, action="store_true")
+    parser.add_argument("--save-students", nargs=1, help="Save the student data to a text file as a strting point for a students file to be used with this script.")
     parser.add_argument("--keys", help="A file containing the consumer key in the first line and the consumer secret in the second line")
     parser.add_argument("--students", help="A tab separated list of student nicknames and user ids. [Default] get students from server.")
     parser.add_argument("--exercises", help="Tab separated list of excersices display names and exercise internal names")
@@ -164,12 +165,19 @@ def main():
     session = init_server(CONSUMER_KEY, CONSUMER_SECRET, SERVER_URL)
     # resource_url = input("Resource relative url (e.g. %s): " % DEFAULT_API_RESOURCE) or DEFAULT_API_RESOURCE
 
-    if args.print_students:
+    if args.print_students or args.save_students:
         students = get_students_from_server(session)
+        students_str = ""
         for st in students:
             name = st['nickname']
             userid = st['user_id']
-            print("{}\t{}".format(name, userid))
+            students_str += "{}\t{}\n".format(name, userid)
+        students_str = students_str[:-1] if students_str != "" else students_str
+        if args.save_students is not None:
+            with open(args.save_students[0], 'w') as outfile:
+                outfile.write(students_str)
+        if args.print_students:
+            print(students_str)
         return
 
     students = get_students(args.students, session)

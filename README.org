@@ -54,16 +54,16 @@ It is intended to be a very detailed guide and I try to cover as much as possibl
    Go to [[https://www.khanacademy.org/api-apps/register]] and fill out the required information.
    Save the keys to a text file, e.g. =keys.txt= with the first line being the =consumer key= and the second line being the =consumer secret=.
    This should then look like
-   #+BEGIN_EXAMPLE
-   BEt1i4gVCP3wen5
-   XA93oqeHruZY5R9
-   #+END_EXAMPLE
+#+BEGIN_EXAMPLE
+BEt1i4gVCP3wen5
+XA93oqeHruZY5R9
+#+END_EXAMPLE
 7) Let's check whether all works and get a list of all our students at the same time.
    We pass the =key.txt= file to the script in order for it to know which keys to use.
    In your terminal, run
-   #+BEGIN_EXAMPLE
-   python3 khan-exstat.py --keys keys.txt --save-students all_students.txt
-   #+END_EXAMPLE
+#+BEGIN_EXAMPLE
+python3 khan-exstat.py --keys keys.txt --save-students all_students.txt
+#+END_EXAMPLE
    We called the program with the =--save-students= with the arguments =all_students.txt=.
    This save a list of all your students into the file =all_students.txt= in your current working directory.
    After running the command, the Khanacademy webpage should pop up, asking you first to log-in and then to verify the api usage we just requested by running the script.
@@ -77,9 +77,9 @@ It is intended to be a very detailed guide and I try to cover as much as possibl
    For the time being, just copy =assigment1.txt= from the =samples= folder.
 10) Now we have everything in place to retrieve the information we want.
     In your terminal, run
-    #+BEGIN_EXAMPLE
-    python3 khan-exstat.py --keys keys.txt --students my_math_class.txt --exercises assigment1.txt
-    #+END_EXAMPLE
+#+BEGIN_EXAMPLE
+python3 khan-exstat.py --keys keys.txt --students my_math_class.txt --exercises assigment1.txt
+#+END_EXAMPLE
     You have to, once again, confirm the request in your browser.
     The result should be a table, with the exercises printed in the header, the names of the students, (if you specified it, see below) an id, the total number of points and the points earned for each of the exercises.
     Note that =1= point indicate an exercise with the status =practiced= while =2= points indicate the status =mastered=.

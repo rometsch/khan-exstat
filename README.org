@@ -37,23 +37,23 @@ Since the values simply a tab separated file, the result can easily be parsed or
 
 Short version:
 
-1) Have =python3=, install package =rauth=, e.g. via =pip3 install --user rauth=
+1) Have =python=, install package =rauth=, e.g. via =pip install --user rauth=
 2) go to [[https://www.khanacademy.org/api-apps/register]] to get a key and save the keys to a text file containing the consumer key in the first line and the consumer secret in the second line.
-3) Run =python3 khan-exstat.py --help= to figure out how it works. (hint: =--save-students= or =--print-students= will be helpful)
+3) Run =python khan-exstat.py --help= to figure out how it works. (hint: =--save-students= or =--print-students= will be helpful)
 
 This section describes the full process of how to use the program =khan-exstat= from installation over preparing the input files to calling the program.
 It is intended to be a very detailed guide and I try to cover as much as possible.
 
-1) Start by installing =Python3= if you have not already done it. 
+1) Start by installing =Python= if you have not already done it. 
    We need it to run the code.
    Install it via the package manager of your choice or download it on the [[https://www.python.org/downloads/release/python-371/][official webpage]] or somewhere else.
-2) Once you have =Python3=, we need to install the package =rauth= to handle the authentication with Khanacademy.
+2) Once you have =Python=, we need to install the package =rauth= to handle the authentication with Khanacademy.
    Install it with the python package manager of your choice.
    I use the package manager =pip=.
    You can get it from their homepage [[https://pypi.org/project/pip/][pypi.org]] or probably via your systems package manager (on linux).
 3) Now download to the code from this repository. Either as a [[https://github.com/rometsch/khan-exstat/archive/master.zip][zip file]] or using git by running =git clone https://github.com/rometsch/khan-exstat.git= inside a terminal.
 4) Change to the directory where you downloaded the code to and unzip it if necessary.
-5) Run =python3 khan-exstat.py --help= to see whether all dependencies are met. You should see the help message detailing the command line arguments.
+5) Run =python khan-exstat.py --help= to see whether all dependencies are met. You should see the help message detailing the command line arguments.
 6) Now we need to get API Keys for Khanacademy.
    Unfortunately, I can't simply provide my own app keys, because you can only get information about students who have the account as coach, who applied for the app keys.
    This is to protect students data (see the [[https://github.com/Khan/khan-api/wiki/Khan-Academy-API-Authentication][khan-api wiki]] for details).
@@ -68,7 +68,7 @@ It is intended to be a very detailed guide and I try to cover as much as possibl
    We pass the =key.txt= file to the script in order for it to know which keys to use.
    In your terminal, run
    #+BEGIN_EXAMPLE
-   python3 khan-exstat.py --keys keys.txt --save-students all_students.txt
+   python khan-exstat.py --keys keys.txt --save-students all_students.txt
    #+END_EXAMPLE
    We called the program with the =--save-students= with the arguments =all_students.txt=.
    This save a list of all your students into the file =all_students.txt= in your current working directory.
@@ -84,7 +84,7 @@ It is intended to be a very detailed guide and I try to cover as much as possibl
 10) Now we have everything in place to retrieve the information we want.
     In your terminal, run
     #+BEGIN_EXAMPLE
-    python3 khan-exstat.py --keys keys.txt --students my_math_class.txt --exercises assigment1.txt
+    python khan-exstat.py --keys keys.txt --students my_math_class.txt --exercises assigment1.txt
     #+END_EXAMPLE
     You have to, once again, confirm the request in your browser.
     The result should be a table, with the exercises printed in the header, the names of the students, (if you specified it, see below) an id, the total number of points and the points earned for each of the exercises.
@@ -92,15 +92,15 @@ It is intended to be a very detailed guide and I try to cover as much as possibl
 
 * Dependencies
 
-The tool is written for =python3= and depends on the package =rauth=.
-You can install it e.g. via =pip3 install --user rauth=.
+The tool is written for =python= (version 2 or 3) and depends on the package =rauth=.
+You can install it e.g. via =pip install --user rauth=.
 
 * Command line arguments
 
 A call of the program with all necessary arguments is:
 
 #+BEGIN_EXAMPLE
-python3 khan-exstat.py --keys keys.txt --students students.txt --exercises exercises.txt
+python khan-exstat.py --keys keys.txt --students students.txt --exercises exercises.txt
 #+END_EXAMPLE
 
 ** --print-students

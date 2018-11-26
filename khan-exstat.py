@@ -1,14 +1,22 @@
 #!/usr/bin/env python3
 """ A script to retrieve exercise status via the khanacademy API"""
 from __future__ import print_function
+from __future__ import unicode_literals
 import cgi
 import rauth
-import http.server
-import socketserver
+try:
+    import SimpleHTTPServer as httpserver
+except ImportError:
+    import http.server as httpserver
+try:
+    import SocketServer as socketserver
+except ImportError:
+    import socketserver
 import time
 import webbrowser
 import json
 import argparse
+from io import open
 
 # You can get a CONSUMER_KEY and CONSUMER_SECRET for your app here:
 # http://www.khanacademy.org/api-apps/register
@@ -25,7 +33,7 @@ VERIFIER = None
 # Create the callback server that's used to set the oauth verifier after the
 # request token is authorized.
 def create_callback_server():
-    class CallbackHandler(http.server.SimpleHTTPRequestHandler):
+    class CallbackHandler(httpserver.SimpleHTTPRequestHandler):
         def do_GET(self):
             global VERIFIER
 

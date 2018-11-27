@@ -206,11 +206,6 @@ def main():
 
     students = get_students(args.students, session)
     exercises2do = get_exercise_list(args.exercises)
-    exercises2do_display = [ex[0] for ex in exercises2do]
-    exercises2do_internal = [ex[1] for ex in exercises2do]
-
-    #print(exercises2do_display)
-    #print(exercises2do_internal)
 
     students_achievements = []
     
@@ -227,15 +222,24 @@ def main():
         total_points = 0
 
         achieved = {}
-        
-        for ex in exercises:
-            internal_name = ex['exercise']
-            display_name = ex['exercise_model']['display_name']
-            #readable_id = ex['exercise_model']['readable_id']
 
-            #print(internal_name, display_name)
-            
-            if internal_name.strip() in exercises2do_internal or display_name.strip() in exercises2do_display:
+        for ex_names in exercises2do:
+            display_name = ex_names[0]
+            internal_name = ex_names[1]
+            matches = [ex for ex in exercises if display_name == ex['exercise_model']['display_name'].strip() or ex['exercise'].strip() == internal_name]
+            if len(matches) == 1:
+                ex = matches[0]
+            elif len(matches) > 1:
+                raise ValueError("Found more than 1 match for '{}': {}".format(
+                    display_name, [ex['exercise_model']['display_name'] for ex in matches]))
+            elif internal_name != "":
+                 ex_json = get_api_resource(
+                     session, '/api/v1/user/exercises/{}?userId={}'.format(internal_name, user_id))
+                 ex = json.loads(ex_json)
+            else:
+                ex = None
+
+            if ex is not None:
                 level = ex['exercise_progress']['level']
                 if level in ['practiced', 'mastery1']:
                     points = 1
@@ -243,13 +247,12 @@ def main():
                     points = 2
                 else:
                     points = 0
-                #print("{} : {}".format(display_name, points))
-
                 achieved[display_name] = points
         
         students_achievements.append(achieved)
 
     # print a table with the exercises and points respectively
+    exercises2do_display = [names[0] for names in exercises2do] 
     for n,ex in enumerate(exercises2do_display):
         print("# {}\t{}".format(n+1, ex))
     print("# Student Name\tid     \ttot\t{}".format("\t".join(["{}".format(n) for n in range(1,len(exercises2do)+1)])))

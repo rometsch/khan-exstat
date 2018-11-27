@@ -154,7 +154,7 @@ def get_exercise_list(exercise_file):
             parts = [s.strip() for s in line.strip().split('\t')]
             parts = parts if len(parts)==2 else parts + ['']
             display_name, internal_name = parts
-            exercises.append([display_name, internal_name])
+            exercises.append([display_name.strip(), internal_name.strip()])
     return exercises
 
 def get_students_from_server(session):

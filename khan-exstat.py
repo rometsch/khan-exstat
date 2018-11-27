@@ -255,8 +255,8 @@ def main():
     print("# Student Name\tid     \ttot\t{}".format("\t".join(["{}".format(n) for n in range(1,len(exercises2do)+1)])))
     for st, achieved in zip(students, students_achievements):
         # get a list of points for all exercises which are to be done
-        points = [achieved[ex] if ex in achieved else 0 for ex in exercises2do_display]
-        tot = sum(points)
+        points = [achieved[ex] if ex in achieved else "-" for ex in exercises2do_display]
+        tot = sum([x for x in points if isinstance(x, int)])
         print("{}\t{}\t{}\t{}".format(st['nickname'], st['student_id'], tot, "\t".join(["{}".format(n) for n in points])))
 
 if __name__ == "__main__":

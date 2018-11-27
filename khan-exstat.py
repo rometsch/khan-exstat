@@ -235,12 +235,12 @@ def main():
 
             #print(internal_name, display_name)
             
-            if internal_name in exercises2do_internal or display_name in exercises2do_display:
-                progress = ex['exercise_progress']
-                if progress['mastered']:
-                    points = 2
-                elif progress['practiced']:
+            if internal_name.strip() in exercises2do_internal or display_name.strip() in exercises2do_display:
+                level = ex['exercise_progress']['level']
+                if level in ['practiced', 'mastery1']:
                     points = 1
+                elif level in ['mastery2', 'mastery3']:
+                    points = 2
                 else:
                     points = 0
                 #print("{} : {}".format(display_name, points))

@@ -252,13 +252,12 @@ def main():
         students_achievements.append(achieved)
 
     # print a table with the exercises and points respectively
-    exercises2do_display = [names[0] for names in exercises2do] 
-    for n,ex in enumerate(exercises2do_display):
-        print("# {}\t{}".format(n+1, ex))
+    for n,ex in enumerate(exercises2do):
+        print("# {}\t{}\t({})".format(n+1, ex[0], ex[1]))
     print("# Student Name\tid     \ttot\t{}".format("\t".join(["{}".format(n) for n in range(1,len(exercises2do)+1)])))
     for st, achieved in zip(students, students_achievements):
         # get a list of points for all exercises which are to be done
-        points = [achieved[ex] if ex in achieved else "-" for ex in exercises2do_display]
+        points = [achieved[ex[0]] if ex[0] in achieved else "-" for ex in exercises2do]
         tot = sum([x for x in points if isinstance(x, int)])
         print("{}\t{}\t{}\t{}".format(st['nickname'], st['student_id'], tot, "\t".join(["{}".format(n) for n in points])))
 

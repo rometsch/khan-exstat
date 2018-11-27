@@ -2,6 +2,7 @@
 """ A script to retrieve exercise status via the khanacademy API"""
 from __future__ import print_function
 from __future__ import unicode_literals
+import os
 import cgi
 import rauth
 try:
@@ -68,6 +69,14 @@ def get_api_resource(session, resource_url):
     response = session.get(url, params=params)
     end = time.time()
 
+    # dump the response text if wanted
+    if dump_datadir is not None:
+        # construct a valid filename from the url request
+        filename = "".join(x for x in resource_url if x.isalnum())
+        with open(os.path.join(dump_datadir, filename), 'w') as outfile:
+            outfile.write(resource_url+'\n')
+            outfile.write(response.text)
+    
     # print("\nTime: %ss\n" % (end - start))
     return response.text
 

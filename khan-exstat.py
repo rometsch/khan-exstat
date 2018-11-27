@@ -169,8 +169,15 @@ def main():
     parser.add_argument("--keys", help="A file containing the consumer key in the first line and the consumer secret in the second line")
     parser.add_argument("--students", help="A tab separated list of student nicknames and user ids. [Default] get students from server.")
     parser.add_argument("--exercises", help="Tab separated list of excersices display names and exercise internal names")
+    parser.add_argument("--dump", help="Dump all responses from the API requests as json files. Specify a folder to dump the data in as argument.")
     args = parser.parse_args()
 
+    global dump_datadir
+    if args.dump is not None:
+        dump_datadir = args.dump
+    else:
+        dump_datadir = None
+    
     if any([s == "" for s in [CONSUMER_KEY, CONSUMER_SECRET]]):
         #print("No keys specified or key missing. Trying to get them from a file")
         if args.keys is None:

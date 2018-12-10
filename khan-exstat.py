@@ -166,9 +166,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--print-students", default=False, action="store_true")
     parser.add_argument("--save-students", nargs=1, help="Save the student data to a text file as a strting point for a students file to be used with this script.")
-    parser.add_argument("--keys", help="A file containing the consumer key in the first line and the consumer secret in the second line")
-    parser.add_argument("--students", help="A tab separated list of student nicknames and user ids. [Default] get students from server.")
-    parser.add_argument("--exercises", help="Tab separated list of excersices display names and exercise internal names")
+    parser.add_argument("-k", "--keys", help="A file containing the consumer key in the first line and the consumer secret in the second line")
+    parser.add_argument("-s", "--students", help="A tab separated list of student nicknames and user ids. [Default] get students from server.")
+    parser.add_argument("-e", "--exercises", help="Tab separated list of excersices display names and exercise internal names")
     parser.add_argument("--dump", help="Dump all responses from the API requests as json files. Specify a folder to dump the data in as argument.")
     args = parser.parse_args()
 
@@ -255,7 +255,12 @@ def main():
     for n,ex in enumerate(exercises2do):
         print("# {}\t{}\t({})".format(n+1, ex[0], ex[1]))
     print("# Student Name\tid     \ttot\t{}".format("\t".join(["{}".format(n) for n in range(1,len(exercises2do)+1)])))
-    for st, achieved in zip(students, students_achievements):
+    # sort the students by name
+    sorted_indices = sorted(range(len(students)), key=[st['nickname'] for st in students].__getitem__)
+    
+    for n in sorted_indices:
+        st = students[n]
+        achieved = students_achievements[n]
         # get a list of points for all exercises which are to be done
         points = [achieved[ex[0]] if ex[0] in achieved else "-" for ex in exercises2do]
         tot = sum([x for x in points if isinstance(x, int)])

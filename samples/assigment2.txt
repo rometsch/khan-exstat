@@ -1,0 +1,9 @@
+Infinite limits: graphical	unbounded-limits-graphical
+Limits by factoring	two-sided-limits-using-algebra
+Limits using conjugates	limits_2
+Divide polynomials with remainders	dividing-polynomials-with-remainders
+Derivative & the direction of a function	recognizing_slope
+Visualizing derivative	visualizing_derivatives
+Differentiate polynomial	power-rule-basic
+Tangents of polynomial	tangents-of-polynomials
+Basic differentiation rules: table	basic-differentiation-rules

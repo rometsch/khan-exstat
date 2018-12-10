@@ -4,6 +4,20 @@
 This is a tool to automatically extract the status of exercises for a list of students from the online learning platform [[https://khanacademy.org]].
 The code is released under MIT license.
 
+* Changelog
+
+** v0.2
+
++ FIX: request information on exercises individually if they don't appear in the =/api/v1/user/exercises= request, since this is incomplete for some students. Unfortunately this increases the runtime.
++ add python2 support
++ sort student names alphabetically in output
++ add option to dump all json responses to a directory (--dump)
++ add short versions of command line arguments
+
+** v0.1
+
++ initial release
+
 * Register a Khan App
 
 You'll need to register an app on Khan Academy in order to be able to authenticate your request and to see your students data.

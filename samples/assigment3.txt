@@ -1,0 +1,16 @@
+Evaluate inverse functions	understanding-inverse-functions
+Find inverse functions	algebraically-finding-inverses
+Use the properties of logarithms	logarithms_2
+Evaluate logarithms (advanced)	logarithms_1.5
+Properties of exponents (rational exponents)	exponents_4
+Limits using trig identities	find-limits-using-trig-identities
+Limits at infinity of quotients with trig	limits-at-infinity-of-rational-functions-trig
+Infinite geometric series	geometric-series-of-constants
+Function as a geometric series	creating-power-series-from-geometric-series-using-algebra
+Taylor & Maclaurin polynomials	finding-taylor-series
+Integrals & derivatives of functions with known power series	creating-power-series-from-geometric-series-using-differentiation-and-integration
+Maclaurin series of sin(x), cos(x), and eˣ	maclaurin-series-for-sin-x--cos-x--and-e-x
+Graphically add & subtract vectors	graphically-adding-and-subtracting-vectors
+Combined vector operations	combined-vector-operations
+Number of solutions to a system of equations algebraically	constructing-consistent-and-inconsistent-system
+Systems of equations word problems	understanding-systems-of-equations-word-problems

@@ -1,0 +1,7 @@
+Matrix elements	understand-matrix-coordinates
+Matrix equations: scalar multiplication	solve-matrix-equations-scalar-multiplication
+Multiply matrices	multiplying_a_matrix_by_a_matrix
+Inverse of a 3 × 3 matrix	matrix_inverse_3x3
+Determinant of a 3 × 3 matrix	matrix_determinant_3x3
+Represent linear systems with matrix equations	writing-systems-of-equations-as-matrix-equations
+Divide complex numbers	dividing_complex_numbers
